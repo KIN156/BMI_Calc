@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <h1 class="text-center">BMI Calculator</h1>
+        <h2 class="text-primary">How to Calculate Body Mass Index (BMI)</h2>
+        <p>Body Mass Index is a simple calculation using a person’s height and weight. The formula is BMI = kg/m<sup>2</sup> where kg is a person’s weight in kilograms and m<sup>2</sup> is their height in meters squared.</p>
+        <p>A BMI of 25.0 or more is considered overweight, while the healthy range is 18.5 to 24.9. BMI applies to most adults aged 18-65 years.</p>
+
+    <h2 class="text-primary">Who Shouldn't Use a BMI Calculator</h2>
+        <p>BMI is not suitable for muscle builders, long-distance athletes, pregnant women, the elderly, or young children. BMI does not consider whether the weight is carried as muscle or fat, focusing only on the number. Individuals with higher muscle mass, like athletes, may have a high BMI but not necessarily be at greater health risk. On the other hand, those with lower muscle mass, such as children who haven't completed their growth or the elderly losing some muscle mass, may have a lower BMI. During pregnancy and lactation, a woman's body composition changes, making BMI inappropriate for use.</p>
+
+    <hr>
+    </div>
+    
+
+    <div class="container mt-3">
+        <form id="bmiForm">
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" name="weight" required step="any" class="form-control"><br>
+                <select id="unitWeight" name="unitWeight" class="form-control">
+                    <option value="lbs">lbs</option>
+                    <option value="kg">kg</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="height">Height:</label>
+                <select id="unitHeight" name="unitHeight" onchange="toggleHeightInputs()" class="form-control">
+                    <option value="cm">cm</option>
+                    <option value="inches">inches</option>
+                </select>
+            </div>
+
+            <div id="heightCmGroup" class="form-group">
+                <input type="number" id="heightCm" name="heightCm" placeholder="Height in cm" required class="form-control">
+            </div>
+
+            <div id="heightInchesGroup" class="form-group" style="display: none;">
+                <label for="heightFeet">Feet:</label>
+                <select id="heightFeet" name="heightFeet" class="form-control">
+                    <option value="4">4'</option>
+                    <option value="5">5'</option>
+                    <option value="6">6'</option>
+                    <option value="7">7'</option>
+                </select>
+
+                <label for="heightInches" class="mt-2">Inches:</label>
+                <select id="heightInches" name="heightInches" class="form-control">
+                    <option value="1">1"</option>
+                    <option value="2">2"</option>
+                    <option value="3">3"</option>
+                    <option value="4">4"</option>
+                    <option value="5">5"</option>
+                    <option value="6">6"</option>
+                    <option value="7">7"</option>
+                    <option value="8">8"</option>
+                    <option value="9">9"</option>
+                    <option value="10">10"</option>
+                    <option value="11">11"</option>
+                    <option value="12">12"</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="calculateBMI()" class="btn btn-primary btn-block">Calculate BMI</button>
+            <button type="button" id="reloadButton" onclick="reloadForm()" class="btn btn-secondary btn-block mt-2">Reload</button>
+        </form>
+        <br>
+        <br>
+        <br>
+        <div>
+            <h2>BMI Categories:</h2>
+            <ul>
+                <li>Underweight = <18.5</li>
+                <li>Normal weight = 18.5–24.9</li>
+                <li>Overweight = 25–29.9</li>
+                <li>Obesity = BMI of 30 or greater</li>
+            </ul>
+
+            <h5>What Next? Take Action Towards Better Health:</h5>
+            &#8594; <a href="https://www.nhlbi.nih.gov/heart-truth/maintain-a-healthy-weight">maintain a healthy weight</a><br>
+            &#8594; Learn more about <a href="https://www.nhlbi.nih.gov/health/overweight-and-obesity">overweight and obesity</a><br>
+            &#8594; <a href="https://www.nhlbi.nih.gov/heart-truth/increase-physical-activity">Increase physical activity</a><br>
+            &#8594; <a href="https://www.nhlbi.nih.gov/heart-truth/eat-a-heart-healthy-diet"> Eat a heart healthy diet</a><br>
+            &#8594; <a href="https://www.nhlbi.nih.gov/heart-truth/know-and-control-your-heart-health-numbers">Take Action Toward Better Heart Health</a>
+        </div>
+        
+
+        <div id="result" class="text-center mt-4"></div>
+    </div>
+
+    <script>
+        function toggleHeightInputs() {
+            var unitHeight = document.getElementById("unitHeight").value;
+            var heightCmGroup = document.getElementById("heightCmGroup");
+            var heightInchesGroup = document.getElementById("heightInchesGroup");
+
+            if (unitHeight === "cm") {
+                heightCmGroup.style.display = "block";
+                heightInchesGroup.style.display = "none";
+            } else if (unitHeight === "inches") {
+                heightCmGroup.style.display = "none";
+                heightInchesGroup.style.display = "block";
+            }
+        }
+
+        function calculateBMI() {
+            var weight = parseFloat(document.getElementById("weight").value);
+            var unitWeight = document.getElementById("unitWeight").value;
+            var unitHeight = document.getElementById("unitHeight").value;
+            var heightCm = parseFloat(document.getElementById("heightCm").value);
+            var heightFeet = parseFloat(document.getElementById("heightFeet").value);
+            var heightInches = parseFloat(document.getElementById("heightInches").value);
+
+            if (isNaN(weight)) {
+                alert("Please enter a valid numeric value for weight.");
+                return;
+            }
+
+            var heightInMeters;
+
+            if (unitHeight === "cm") {
+                heightInMeters = heightCm / 100; // Convert cm to meters
+            } else if (unitHeight === "inches") {
+                heightInMeters = (heightFeet * 0.3048) + (heightInches * 0.0254); // Convert feet and inches to meters
+            }
+
+            var bmi = 0;
+
+            if (unitWeight === "lbs") {
+                weight = weight * 0.453592; // Convert lbs to kg
+            }
+
+            bmi = weight / (heightInMeters * heightInMeters);
+
+            var resultElement = document.getElementById("result");
+            resultElement.innerHTML = "Your Body Mass Index is: " + bmi.toFixed(2);
+            resultElement.innerHTML += "<br>This is considered: " + getBMILevel(bmi);
+        }
+
+        function getBMILevel(bmi) {
+            if (bmi < 18.5) {
+                return "Underweight";
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                return "Normal weight";
+            } else if (bmi >= 25.0) {
+                return "Overweight";
+            }
+        }
+
+        function reloadForm() {
+            document.getElementById("bmiForm").reset();
+            // Reset the display of height input groups
+            document.getElementById("heightCmGroup").style.display = "block";
+            document.getElementById("heightInchesGroup").style.display = "none";
+            // Clear the result
+            document.getElementById("result").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
